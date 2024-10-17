@@ -1,0 +1,115 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="output.css")
+        title Student management
+    body 
+        main(class="bg-gradient-to-r from-[#8E2DE2] to-[#4A00E0] text-white min-h-screen") 
+            div(class="px-6 md:px-12 lg:max-w-5xl mx-auto py-20")
+                h1(class="font-bold text-4xl lg:text-6xl capitalize") Student management
+                
+                div(class="grid lg:grid-cols-2 gap-8 mt-8") 
+                    //- form
+                    form(action="/", method="post" class="space-y-4")
+                        if error 
+                            p(class="text-white bg-red-500 p-8")= error
+                        div 
+                            label(for="first-name") First name 
+                            input(type="text", name="first-name" id="first-name" class="block bg-gray-100 px-4 py-2 rounded-md text-black mt-2 w-full")
+
+                        div
+                            label(for="last-name") Last name 
+                            input(type="text", name="last-name" id="last-name" class="block bg-gray-100 px-4 py-2 rounded-md text-black mt-2 w-full")
+
+                        div
+                            label(for="age") Age 
+                            input(type="number", name="age" id="age" class="block bg-gray-100 px-4 py-2 rounded-md text-black mt-2 w-full")
+
+                        div
+                            label(for="phone") Phone
+                            input(type="text", name="phone" id="phone" class="block bg-gray-100 px-4 py-2 rounded-md text-black mt-2 w-full")
+
+                        div
+                            label(for="email") Email 
+                            input(type="email", name="email" id="email" class="block bg-gray-100 px-4 py-2 rounded-md text-black mt-2 w-full")
+
+                        div
+                            label(for="gender") Gender 
+                            select(name="gender" id="gender" class="block text-black px-4 py-2 rounded-md mt-2") 
+                                option(value="") -- Please select a gender --
+                                option(value="male") Male  
+                                option(value="female") Female
+                            //- input(type="text", name="gender" id="gender" class="block bg-gray-100 px-4 py-2 rounded-md text-black mt-2 w-full")
+
+                        div
+                            label(for="address") Address 
+                            input(type="text", name="address" class="block bg-gray-100 px-4 py-2 rounded-md text-black mt-2 w-full")
+
+                        div 
+                            legend Hobbies 
+                            div(class="flex gap-4 flex-wrap mt-2") 
+                                div
+                                    input(type="checkbox", name="hobby" value="programming" id="swimming") 
+                                    label(for="swimming" class="ml-2") Swimming 
+
+                                div
+                                    input(type="checkbox", name="hobby" value="dancing" id="dancing")
+                                    label(for="dancing" class="ml-2") Dancing 
+
+                                div
+                                    input(type="checkbox", name="hobby" value="playing" id="playing")
+                                    label(for="playing" class="ml-2") Playing 
+
+                                div
+                                    input(type="checkbox", name="hobby" value="running" id="running")
+                                    label(for="running" class="ml-2") Running 
+
+                                div
+                                    input(type="checkbox", name="hobby" value="reading" id="reading")
+                                    label(for="reading" class="ml-2") Reading 
+
+                        div 
+                            legend Classes 
+                            div(class="flex gap-4 flex-wrap mt-2") 
+                                div
+                                    input(type="checkbox", name="unit" value="programming" id="programming") 
+                                    label(for="programming" class="ml-2") Programming 
+
+                                div
+                                    input(type="checkbox", name="unit" value="design" id="design")
+                                    label(for="design" class="ml-2") Design 
+
+                                div
+                                    input(type="checkbox", name="unit" value="maths" id="maths")
+                                    label(for="maths" class="ml-2") Maths 
+
+                                div
+                                    input(type="checkbox", name="unit" value="chemistry" id="chemistry")
+                                    label(for="chemistry" class="ml-2") Chemistry 
+
+                                div
+                                    input(type="checkbox", name="unit" value="art" id="art")
+                                    label(for="art" class="ml-2") Art
+                          
+
+                        button(type="submit" class="bg-green-500 hover:bg-green-700 transition ease-in-out duration-300 px-8 py-3 rounded-md active:scale-[.97]") Enroll student
+
+                    //- display list
+                    div 
+                        if students
+                            div(class=" w-full h-full flex justify-center")
+                                div(class="lg:mt-8")
+                                    h2(class=" text-3xl") Students
+                                    ul(class="mt-8 space-y-2 list-decimal") 
+                                        each student in students
+                                            li(class="hover:text-orange-500 transition-colors ease-in-out duration-300") 
+                                                a(href=`/students/${student._id}`) #{student.first_name } #{student.last_name}
+                                                //- Delete btn
+                        else 
+                            div(class="w-full h-full grid place-items-center")
+                                div
+                                    p(class="text-xl") Students will be displayed here
+                                    img(src="/images/no_data.svg" class="w-40 mt-8 mx-auto")
+                
